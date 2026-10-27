@@ -1,22 +1,96 @@
 import java.util.*;
-
 class Course {
-    String id, name, instructor;
+    int id;
+    String name;
     int credits;
-    Course(String id, String name, int credits, String instructor) {
-        this.id = id; this.name = name; this.credits = credits; this.instructor = instructor;
+    Course(int id, String name, int credits) {
+        this.id = id;
+        this.name = name;
+        this.credits = credits;
     }
 }
 class Student {
-    String id, name;
-    Student(String id, String name) { this.id = id; this.name = name; }
+    int id;
+    String name;
+    String term;
+    Set<Integer> registeredCourses = new HashSet<>();
+    Student(int id, String name, String term) {
+        this.id = id;
+        this.name = name;
+        this.term = term;
+    }
 }
 class Assessment {
-    int id; String name, courseId; int weightage;
-    String examDate = "12-Dec-2024 10:00 AM";
-    String hall = "Hall B-203";
-    Map<String, Integer> marks = new HashMap<>();
-    Assessment(int id, String name, String courseId, int weightage) {
-        this.id = id; this.name = name; this.courseId = courseId; this.weightage = weightage;
+    int id;
+    int courseId;
+    String name;
+    double weight;
+    Assessment(int id, int courseId, String name, double weight) {
+        this.id = id;
+        this.courseId = courseId;
+        this.name = name;
+        this.weight = weight;
+    }
+}
+
+class ExamSchedule {
+    int courseId;
+    String date;
+    String time;
+    ExamSchedule(int courseId, String date, String time) {
+        this.courseId = courseId;
+        this.date = date;
+        this.time = time;
+    }
+}
+class MarkEntry {
+    int studentId;
+    int courseId;
+    int assessmentId;
+    double marks;
+    MarkEntry(int studentId, int courseId,
+              int assessmentId, double marks) {
+        this.studentId = studentId;
+        this.courseId = courseId;
+        this.assessmentId = assessmentId;
+        this.marks = marks;
+    }
+}
+class Grade {
+    double total;
+    String letter;
+    int points;
+    Grade(double total) {
+        this.total = total;
+        if (total >= 90) {
+            letter = "O";
+            points = 10;
+        } else if (total >= 80) {
+            letter = "A+";
+            points = 9;
+        } else if (total >= 70) {
+            letter = "A";
+            points = 8;
+        } else if (total >= 60) {
+            letter = "B+";
+            points = 7;
+        } else if (total >= 50) {
+            letter = "B";
+            points = 6;
+        } else if (total >= 40) {
+            letter = "C";
+            points = 5;
+        } else {
+            letter = "F";
+            points = 0;
+        }
+    }
+}
+
+class Transcript {
+    Student student;
+    Map<Integer, Grade> grades = new HashMap<>();
+    Transcript(Student student) {
+        this.student = student;
     }
 }
